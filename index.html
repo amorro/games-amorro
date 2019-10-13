@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/master.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
+</head>
+
+<body class="container">
+  <header>
+    <div class="row">
+      <nav class="nav col-12 justify-content-center nav-pills nav-fill">
+        <a class="nav-link active" href="#">Home</a>
+        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href="#">Link</a>
+      </nav>
+    </div>
+    <div class="row">
+      <div id="carouselExampleIndicators" class="col-12 carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="https://static.makeuseof.com/wp-content/uploads/2017/10/whats-league-legends.jpg" class=" img d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="https://steamcdn-a.akamaihd.net/steam/apps/271590/header.jpg" class="img d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="https://store-images.s-microsoft.com/image/apps.37113.14339303838396367.81742acc-767e-4ef5-8b14-28243e6eab67.cf69b9b9-b00d-4ede-8f27-743c2c25ef8b?mode=scale&q=90&h=720&w=1280" class="img d-block w-100" alt="...">
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div>
+  </header>
+  <hr>
+  <main>
+    <div class="row">
+      <span class="h3 col-12">Fitxa del joc</span>
+      <form name="form" action="#">
+        <div class="form-row">
+          <div class="form-group col-5">
+            <label for="inlineFormInput" class="col-5 col-form-label">Nom del joc</label>
+            <input type="text" class="form-control" id="titol" placeholder="Nom del joc" required>
+          </div>
+          <div class="form-group col-5">
+            <label for="example-date-input" class="col-5 col-form-label">Any de llançament</label>
+            <div class="col-10">
+              <input class="form-control data" id="data" min="1980" max="2099" step="1" value="2016" type="number" required>
+            </div>
+          </div>
+          <div class="form-group col-1">
+            <label class="my-1 mr-2" for="inlineFormCustomSelectPref">PEGI</label>
+            <select class="custom-select my-1 mr-sm-2" id="pegi">
+              <option value="3">3</option>
+              <option value="7">7</option>
+              <option value="12">12</option>
+              <option value="16">16</option>
+              <option value="18">18</option>
+            </select>
+          </div>
+          <div class="form-group col-5">
+            <label for="inlineFormInput" class="col-5 col-form-label">Empresa</label>
+            <input type="text" class="form-control" id="empresa" placeholder="Empresa" required>
+          </div>
+          <div class="form-group col-5">
+            <label for="inlineFormInput" class="col-5 col-form-label">Gènere</label>
+            <input type="text" class="form-control" id="genere" placeholder="Gènere" required>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" onclick="validateForm()">Afegir joc</button>
+      </form>
+    </div>
+
+    <div id="modal-message" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Error</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div id="txt-message" class="modal-body">
+            <p></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <span class="h3 col-12">Llista dels jocs</span>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Titol</th>
+            <th scope="col">Llançament</th>
+            <th scope="col">PEGI</th>
+            <th scope="col">Empresa</th>
+            <th scope="col">Gènere</th>
+          </tr>
+        </thead>
+        <tbody id="tableJocs">
+
+        </tbody>
+      </table>
+    </div>
+  </main>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="./js/clases.js"></script>
+  <script src="./js/validation.js"></script>
+
+</body>
+
+</html>
