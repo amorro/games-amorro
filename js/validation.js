@@ -15,7 +15,7 @@ function printTableGames(lGames) {
                   <td>${currentGame.genere}</td>
                 </tr>
                 `;
-  })
+  });
 }
 
 $(function() {
